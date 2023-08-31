@@ -13,6 +13,8 @@ class DomainCrawlerSpider(CrawlSpider):
         Rule(LinkExtractor(), callback="parse_item", follow=True),
     )
 
+    visited_urls = set()  # Maintain a set of visited URLs
+
     def __init__(self, *args, **kwargs):
         super(DomainCrawlerSpider, self).__init__(*args, **kwargs)
         self.allowed_domains = [kwargs.get("domain")]
@@ -29,7 +31,13 @@ class DomainCrawlerSpider(CrawlSpider):
             if keyword.lower() in response.text.lower():
                 item["keywords"].append(keyword)
 
-        if item["keywords"]:
-            return item  # Only yield items with keywords
+        # Only yield items with keywords and if URL is not visited
+        if item["keywords"] and response.url not in self.visited_urls:
+            self.visited_urls.add(response.url)
+            yield item
 
-        return None  # Discard items without keywords
+    def _requests_to_follow(self, response):
+        for request in super()._requests_to_follow(response):
+            if request.url not in self.visited_urls:
+                self.visited_urls.add(request.url)
+                yield request
