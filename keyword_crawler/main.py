@@ -3,7 +3,7 @@ from scrapy.crawler import CrawlerProcess
 from keyword_crawler.spiders.domain_crawler import DomainCrawlerSpider
 import logging
 
-keywords = ["Valorant"]
+keywords = ["while"]
 output_csv_file = "keyword_matches.csv"
 batch_size = 5  # Number of domains to process in each batch
 

@@ -2,6 +2,7 @@ import scrapy
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from keyword_crawler.items import KeywordCrawlerItem
+from langdetect import detect
 
 class DomainCrawlerSpider(CrawlSpider):
     name = "domain_crawler"
@@ -25,7 +26,14 @@ class DomainCrawlerSpider(CrawlSpider):
         item["url"] = response.url
         item["keywords"] = []
 
+        lang = detect(response.text)  # Detect the language of the webpage
+
         print(f"Crawler {self.name} is scanning: {response.url}")
+
+        # Skip processing if language is not English
+        if lang != "en":
+            print(f"Skipping {response.url} as it's not in English.")
+            return None
 
         for keyword in self.keywords:
             if keyword.lower() in response.text.lower():
