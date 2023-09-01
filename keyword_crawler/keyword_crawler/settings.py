@@ -53,9 +53,16 @@ COOKIES_ENABLED = False
 DOWNLOADER_MIDDLEWARES = {
    "keyword_crawler.middlewares.KeywordCrawlerDownloaderMiddleware": 543,
     'scrapy_proxies.RandomProxy': 100,
+    'rotating_proxies.middlewares.RotatingProxiesMiddleware': 610,
+    'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
 }
 
-PROXY_LIST = 'C:\Users\Admin\Desktop\code\python\KeyWordScanner\list.txt'
+ROTATING_PROXY_LIST = [
+    "http://186.234.124.127:8080"
+    "http://205.233.79.250:999"
+    "http://45.181.123.97:999"
+    "http://157.100.56.108:999"
+]
 
 RETRY_TIMES = 5  # Adjust as needed
 RETRY_HTTP_CODES = [500, 502, 503, 504, 400, 403, 404, 408]
