@@ -3,9 +3,14 @@ from scrapy.crawler import CrawlerProcess
 from keyword_crawler.spiders.domain_crawler import DomainCrawlerSpider
 import logging
 
-keywords = ["while"]
+keywords = [
+    "Valorant",
+    "Gigabit",
+    "GTPL",
+    "Rajeev",
+]
 output_csv_file = "keyword_matches.csv"
-batch_size = 5  # Number of domains to process in each batch
+batch_size = 10  # Number of domains to process in each batch
 
 
 def process_batch(domains):
@@ -15,6 +20,7 @@ def process_batch(domains):
             "FEED_URI": output_csv_file,
             "LOG_ENABLED": False,
             "LOG_LEVEL": logging.ERROR,
+            "DEPTH_LIMIT": 3,
         }
     )
 
@@ -25,9 +31,9 @@ def process_batch(domains):
 
 
 def main():
-    with open("top10milliondomains.csv", "r") as domain_file:
+    with open("websites.csv", "r") as domain_file:
         domain_reader = csv.DictReader(domain_file)
-        domains = [row["Domain"] for row in domain_reader]
+        domains = [row["Website"] for row in domain_reader]
 
     for i in range(0, len(domains), batch_size):
         batch = domains[i : i + batch_size]

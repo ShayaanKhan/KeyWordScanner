@@ -4,15 +4,14 @@ from scrapy.spiders import CrawlSpider, Rule
 from keyword_crawler.items import KeywordCrawlerItem
 from langdetect import detect
 
+
 class DomainCrawlerSpider(CrawlSpider):
     name = "domain_crawler"
 
     allowed_domains = []  # Domains will be populated from CSV
     start_urls = []  # URLs will be populated from CSV
 
-    rules = (
-        Rule(LinkExtractor(), callback="parse_item", follow=True),
-    )
+    rules = (Rule(LinkExtractor(), callback="parse_item", follow=True),)
 
     visited_urls = set()  # Maintain a set of visited URLs
 

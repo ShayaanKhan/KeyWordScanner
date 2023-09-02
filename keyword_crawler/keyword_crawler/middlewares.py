@@ -101,3 +101,18 @@ class KeywordCrawlerDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info("Spider opened: %s" % spider.name)
+
+
+import random
+from scrapy import signals
+from scrapy.downloadermiddlewares.httpproxy import HttpProxyMiddleware
+
+class RotateProxyMiddleware(HttpProxyMiddleware):
+    def __init__(self, settings):
+        super().__init__()
+        self.proxies = settings.getlist('PROXY_LIST', [])
+
+    def process_request(self, request, spider):
+        # Rotate through the list of proxies for each request
+        if self.proxies:
+            request.meta['proxy'] = random.choice(self.proxies)

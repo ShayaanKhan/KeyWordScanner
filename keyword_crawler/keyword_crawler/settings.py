@@ -31,7 +31,7 @@ ROBOTSTXT_OBEY = True
 # CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-COOKIES_ENABLED = False
+# COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
@@ -51,18 +51,18 @@ COOKIES_ENABLED = False
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   "keyword_crawler.middlewares.KeywordCrawlerDownloaderMiddleware": 543,
-    'scrapy_proxies.RandomProxy': 100,
-    'rotating_proxies.middlewares.RotatingProxiesMiddleware': 610,
-    'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 400,
+    'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 401,  # Optional, for user-agent rotation
+    'keyword_crawler.middlewares.RotateProxyMiddleware': 100,
 }
-
-ROTATING_PROXY_LIST = [
-    "http://186.234.124.127:8080"
-    "http://205.233.79.250:999"
-    "http://45.181.123.97:999"
-    "http://157.100.56.108:999"
+PROXY_LIST = [
+    'http://186.234.124.127:8080'
+    'http://205.233.79.250:999'
+    'http://45.181.123.97:999'
+    'http://157.100.56.108:999'
 ]
+
+
 
 RETRY_TIMES = 5  # Adjust as needed
 RETRY_HTTP_CODES = [500, 502, 503, 504, 400, 403, 404, 408]
@@ -95,7 +95,7 @@ RETRY_HTTP_CODES = [500, 502, 503, 504, 400, 403, 404, 408]
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-HTTPCACHE_ENABLED = True
+# HTTPCACHE_ENABLED = True
 # HTTPCACHE_EXPIRATION_SECS = 0
 # HTTPCACHE_DIR = "httpcache"
 # HTTPCACHE_IGNORE_HTTP_CODES = []
