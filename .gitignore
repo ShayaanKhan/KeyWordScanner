@@ -9,10 +9,13 @@
 # Ignore IDE specific files
 .idea/
 .vscode/
-.env
 
 # Ignore log files
 *.log
+.gitignore
+.gitattributes
+.venv
+.env
 
 # Ignore operating system files
 .DS_Store
