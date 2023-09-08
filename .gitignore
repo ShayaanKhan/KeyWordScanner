@@ -1,0 +1,19 @@
+# Ignore compiled files
+*.class
+*.o
+*.pyc
+
+# Ignore dependencies folder
+/node_modules
+
+# Ignore IDE specific files
+.idea/
+.vscode/
+.env/
+
+# Ignore log files
+*.log
+
+# Ignore operating system files
+.DS_Store
+Thumbs.db
