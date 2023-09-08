@@ -9,7 +9,7 @@
 # Ignore IDE specific files
 .idea/
 .vscode/
-.env/
+.env
 
 # Ignore log files
 *.log
