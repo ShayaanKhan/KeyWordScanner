@@ -1,8 +1,13 @@
-from utils.intelx import intelx
-from rich import print
 import os
+from rich import print
 
-if (x:=os.getenv('INTELX_API_KEY')):
+from utils.intelx import intelx
+
+# Verify the correct location of the intelx module and update the import statement if necessary
+
+x = os.getenv('intelToken')
+
+if x:
     itx = intelx(x)
 else:
     itx = intelx()
@@ -10,7 +15,7 @@ else:
 while True:
     email = input('Search email/domain: ')
 
-    records = itx.search(email, maxresults=9999)['records']
+    records = itx.search(email, max_results=9999)['records']
     print(f"[bold red]Found {len(records)} records[/bold red]")
 
     for result in records:
