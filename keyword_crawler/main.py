@@ -9,7 +9,7 @@ keywords = [
     "GTPL",
     "Rajeev",
 ]
-output_csv_file = "keyword_matches.csv"
+output_csv_file = "datasets\keyword_matches.csv"
 batch_size = 10  # Number of domains to process in each batch
 
 
@@ -31,7 +31,7 @@ def process_batch(domains):
 
 
 def main():
-    with open("websites.csv", "r") as domain_file:
+    with open("datasets\websites.csv", "r") as domain_file:
         domain_reader = csv.DictReader(domain_file)
         domains = [row["Website"] for row in domain_reader]
 
